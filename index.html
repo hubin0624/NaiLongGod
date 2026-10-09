@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <meta name="theme-color" content="#152c31" />
+  <title>奶娃神：风原纪行</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main id="game-shell">
+    <canvas id="game" aria-label="奶娃神游戏画面"></canvas>
+
+    <section id="start-screen" class="screen visible">
+      <div class="start-vignette"></div>
+      <img class="hero-art" src="assets/naiwa-faithful.png" alt="奶娃" />
+      <div class="title-block">
+        <p class="eyebrow">第三人称 3D 开放世界冒险</p>
+        <h1><span>奶娃神</span><small>风原纪行</small></h1>
+        <p class="prologue">风种失散，旧塔沉睡。奶娃踏入会呼吸的澄风原。</p>
+        <button id="start-button" class="primary-button"><span>启程</span><i>ENTER</i></button>
+        <div class="start-hints"><span>WASD 移动</span><b>·</b><span>拖动鼠标环视</span><b>·</b><span>J 攻击</span><b>·</b><span>E 交互</span></div>
+      </div>
+      <p class="local-note">WebGL 3D · 离线单机 · 进度自动保存在本机</p>
+    </section>
+
+    <section id="hud" aria-label="游戏界面">
+      <div class="top-left">
+        <div class="avatar"><img src="assets/naiwa-faithful.png" alt="" /></div>
+        <div class="status-stack">
+          <div class="name-row"><strong>奶娃</strong><span>Lv. 1</span></div>
+          <div class="meter hp"><i id="hp-fill"></i><span id="hp-label">100 / 100</span></div>
+          <div class="meter stamina"><i id="stamina-fill"></i></div>
+        </div>
+      </div>
+
+      <div class="top-center">
+        <span id="region-label">澄风原 · 晨风坡</span>
+        <div id="clock"><i></i><span>07:20</span></div>
+      </div>
+
+      <aside class="quest-card">
+        <div class="quest-kicker">当前委托</div>
+        <h2 id="quest-title">风种的回声</h2>
+        <p id="quest-text">前往风栖村，与守风人阿芽交谈</p>
+        <div id="quest-progress"><i></i></div>
+      </aside>
+
+      <canvas id="minimap" width="176" height="176" aria-label="小地图"></canvas>
+
+      <div id="interaction" class="interaction"><kbd>E</kbd><span>交互</span></div>
+      <div id="toast" class="toast"><strong></strong><span></span></div>
+      <div id="damage-vignette"></div>
+
+      <div class="abilities" aria-label="技能">
+        <button data-action="attack"><kbd>J</kbd><span>云团拍击</span></button>
+        <button data-action="skill" class="skill"><kbd>Q</kbd><span>蒲公英爆发</span><i id="skill-cd"></i></button>
+        <button data-action="dash"><kbd>⇧</kbd><span>软弹冲刺</span></button>
+      </div>
+
+      <div class="controls-hint">WASD 移动　拖动鼠标环视　滚轮缩放　Shift 冲刺　J 攻击　Q 技能　E 交互　M 地图</div>
+
+      <div id="dialogue" class="dialogue" role="dialog" aria-live="polite">
+        <img src="assets/naiwa-faithful.png" alt="" />
+        <div><strong id="speaker">阿芽</strong><p id="dialogue-text"></p></div>
+        <button id="dialogue-next">继续 <kbd>E</kbd></button>
+      </div>
+
+      <div id="world-map" class="world-map screen">
+        <button id="close-map" class="close">×</button>
+        <div class="map-heading"><span>澄风原</span><small>探索度 <b id="explore-percent">0%</b></small></div>
+        <canvas id="map-canvas" width="920" height="600"></canvas>
+        <div class="map-legend"><span><i class="you"></i>奶娃</span><span><i class="teleport"></i>风脉点</span><span><i class="chest"></i>宝箱</span></div>
+      </div>
+    </section>
+
+    <div id="webgl-error"><strong>无法启动 3D 场景</strong><span>请使用支持 WebGL 的新版 Chrome 或 Edge 打开。</span></div>
+
+    <div id="mobile-controls">
+      <div id="joystick"><i></i></div>
+      <button data-action="attack">击</button>
+      <button data-action="skill">风</button>
+      <button data-action="interact">E</button>
+    </div>
+  </main>
+  <script src="game3d.js"></script>
+</body>
+</html>
